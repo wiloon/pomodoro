@@ -1,8 +1,13 @@
-function kso() {
-  navigator.getWakeLock("screen").then(function(wakeLock) {
-    var request = wakeLock.createRequest();
-    setTimeout(function() {
-      request.cancel();
-    }, 6000);
-  });
+async function kso() {
+  let wakeLockObj;
+
+  try {
+    // Create a wake lock for the type we want.
+    wakeLockObj = await navigator.getWakeLock('screen');
+    wakeLockRequest = wakeLockObj.createRequest();
+    console.log('👍', 'getWakeLock', wakeLockObj);
+  } catch (ex) {
+    console.error('👎', 'getWakeLock', ex);
+  }
+
 }
