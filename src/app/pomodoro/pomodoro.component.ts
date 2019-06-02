@@ -4,6 +4,8 @@ import {timer} from 'rxjs';
 import {pluck, take, timeInterval} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 
+declare function kso(): any;
+
 @Component({
   selector: 'app-pomodoro',
   templateUrl: './pomodoro.component.html',
@@ -26,6 +28,7 @@ export class PomodoroComponent implements OnInit {
       );
 
     sourcef.subscribe(val => this.updateTimer(val));
+    this.keepScreenOn();
   }
 
   updateTimer(val: number): void {
@@ -45,13 +48,17 @@ export class PomodoroComponent implements OnInit {
 
   tick(): void {
     this.timestampStart = new Date().getTime();
-    this.pomodorotime = 'bar';
+    this.pomodorotime = '0';
     if (this.state === '' || this.state === 'short') {
       this.state = 'long';
+    } else {
+      this.state = 'short';
     }
   }
 
+
   keepScreenOn(): void {
     // invoke javascript
+    kso();
   }
 }
