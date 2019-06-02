@@ -1,13 +1,20 @@
 async function kso() {
-  let wakeLockObj;
+  const checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  document.body.appendChild(checkbox);
 
-  try {
-    // Create a wake lock for the type we want.
-    wakeLockObj = await navigator.getWakeLock('screen');
-    wakeLockRequest = wakeLockObj.createRequest();
-    console.log('👍', 'getWakeLock', wakeLockObj);
-  } catch (ex) {
-    console.error('👎', 'getWakeLock', ex);
+  let controller;
+
+  checkbox.onclick = async () => {
+    try {
+      if (checkbox.checked) {
+        controller = new AbortController();
+        await WakeLock.request("screen", { signal: controller.signal });
+      } else if (controller) {
+        controller.abort();
+      }
+    } catch {
+      checkbox.checked = false;
+    }
   }
-
 }
