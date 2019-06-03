@@ -4,7 +4,7 @@ import {timer} from 'rxjs';
 import {pluck, take, timeInterval} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 
-declare function kso(): any;
+declare function toggleWakeLock(): any;
 
 @Component({
   selector: 'app-pomodoro',
@@ -59,6 +59,6 @@ export class PomodoroComponent implements OnInit {
 
   keepScreenOn(): void {
     // invoke javascript
-    kso();
+    toggleWakeLock();
   }
 }
