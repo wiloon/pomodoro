@@ -1,7 +1,5 @@
 let wakeLock;
 let wakeLockRequest;
-let wakeLockStart;
-
 
 async function toggleWakeLock() {
   if ('getWakeLock' in navigator) {
