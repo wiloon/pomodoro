@@ -1,6 +1,16 @@
-<p>state: {{state}}</p>
-<p>start: {{ timestampStart}}</p>
+<div class="fields-container">
+  <mat-form-field>
+    <mat-label>state</mat-label>
+    <input matInput placeholder="Input" value=" {{state}}">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>start</mat-label>
+    <input matInput placeholder="Input" value=" {{dateTimeStartString}}">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>time</mat-label>
+    <input matInput placeholder="Input" value=" {{pomodorotime}}">
+  </mat-form-field>
+</div>
+<button mat-raised-button color="primary" (click)="tick()">Tick</button>
 
-<p>time: {{pomodorotime}}</p>
-
-<button (click)="tick()">tick</button>

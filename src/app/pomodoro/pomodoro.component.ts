@@ -14,8 +14,11 @@ declare function toggleWakeLock(): any;
 export class PomodoroComponent implements OnInit {
 
   pomodorotime = '0';
-  timestampStart = 0;
+
   state = '';
+  dateTimeStart = new Date();
+  dateTimeStartString = '';
+
 
   constructor() {
   }
@@ -29,11 +32,12 @@ export class PomodoroComponent implements OnInit {
 
     sourcef.subscribe(val => this.updateTimer(val));
     this.keepScreenOn();
+    this.dateTimeStart = new Date();
   }
 
   updateTimer(val: number): void {
-    const now = Date.parse(new Date().toString());
-    const diff = new Date().getTime() - this.timestampStart;
+
+    const diff = new Date().getTime() - this.dateTimeStart.getTime();
     const result = diff / (1000 * 60);
     if (this.state === '') {
       return;
@@ -47,13 +51,17 @@ export class PomodoroComponent implements OnInit {
   }
 
   tick(): void {
-    this.timestampStart = new Date().getTime();
+    this.dateTimeStart = new Date();
+    this.dateTimeStartString = this.dateTimeStart.toLocaleString();
+
     this.pomodorotime = '0';
     if (this.state === '' || this.state === 'short') {
       this.state = 'long';
     } else {
       this.state = 'short';
     }
+
+
   }
 
 
