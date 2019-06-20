@@ -12,5 +12,8 @@
     <input matInput placeholder="Input" value=" {{pomodorotime}}">
   </mat-form-field>
 </div>
-<button mat-raised-button color="primary" (click)="tick()">Tick</button>
+<button mat-raised-button
+        [color]="paletteColour"
+        (click)="tick()">Tick
+</button>
 

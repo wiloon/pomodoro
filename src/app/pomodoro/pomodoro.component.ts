@@ -1,8 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Pomodoro} from '../pomodoro';
+import {Component, OnInit} from '@angular/core';
 import {timer} from 'rxjs';
-import {pluck, take, timeInterval} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
+import {pluck, timeInterval} from 'rxjs/operators';
 
 declare function toggleWakeLock(): any;
 
@@ -18,6 +16,7 @@ export class PomodoroComponent implements OnInit {
   state = '';
   dateTimeStart = new Date();
   dateTimeStartString = '';
+  paletteColour = 'primary';
 
 
   constructor() {
@@ -46,8 +45,13 @@ export class PomodoroComponent implements OnInit {
       this.state === 'long' && result < 25 ||
       this.state === 'short' && result < 5) {
       this.pomodorotime = result.toFixed(2);
+    } else {
+      if (this.paletteColour === 'primary') {
+        this.paletteColour = 'warn';
+      } else {
+        this.paletteColour = 'primary';
+      }
     }
-
   }
 
   tick(): void {
@@ -60,8 +64,7 @@ export class PomodoroComponent implements OnInit {
     } else {
       this.state = 'short';
     }
-
-
+    this.paletteColour = 'primary';
   }
 
 
